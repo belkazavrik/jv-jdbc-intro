@@ -38,7 +38,7 @@ public class BookDaoImpl implements BookDao {
             }
 
         } catch (SQLException e) {
-            throw new DataProcessingException("Can not create a book", e);
+            throw new DataProcessingException("Can not create a book: " + book.getTitle(), e);
         }
         return book;
     }
@@ -67,8 +67,8 @@ public class BookDaoImpl implements BookDao {
         String sql = "SELECT * FROM books";
         List<Book> bookList = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection();
-                Statement statement = connection.createStatement()) {
-            try (ResultSet resultSet = statement.executeQuery(sql)) {
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     bookList.add(parseBook(resultSet));
                 }

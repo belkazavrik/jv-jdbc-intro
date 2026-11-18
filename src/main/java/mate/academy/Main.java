@@ -11,15 +11,10 @@ public class Main {
     public static void main(String[] args) {
         BookDao bookDao = (BookDao) injector.getInstance(BookDao.class);
 
-        Book firstBook = new Book("First book", new BigDecimal("35.5"));
-        Book secondBook = new Book("Second book", new BigDecimal("65.5"));
-        Book thirdBook = new Book("Third book", new BigDecimal("15"));
-        Book fourthBook = new Book("Fourth book", new BigDecimal("103.1"));
-
-        bookDao.create(firstBook);
-        bookDao.create(secondBook);
-        bookDao.create(thirdBook);
-        bookDao.create(fourthBook);
+        final Book firstBook = bookDao.create(new Book("First book", new BigDecimal("35.5")));
+        final Book secondBook = bookDao.create(new Book("Second book", new BigDecimal("65.5")));
+        final Book thirdBook = bookDao.create(new Book("Third book", new BigDecimal("15")));
+        final Book fourthBook = bookDao.create(new Book("Fourth book", new BigDecimal("103.1")));
 
         bookDao.findAll().forEach(System.out::println);
         System.out.println();
