@@ -38,7 +38,7 @@ public class BookDaoImpl implements BookDao {
             }
 
         } catch (SQLException e) {
-            throw new DataProcessingException("Can not create a book: " + book.getTitle(), e);
+            throw new DataProcessingException("Can not create a book: " + book, e);
         }
         return book;
     }
